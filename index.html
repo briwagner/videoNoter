@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Popcorn Annotater</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<!-- // <script type="text/javascript" src="capture.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+	<script type="text/javascript" src="script.js"> </script>
+	<script src="http://popcornjs.org/code/dist/popcorn-complete.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+
+	<div id="selector" class="col-md-12">
+		<div class="dropdown">
+			<!--orphan button to copy-->
+			<button class="btn btn-success" id="copyText" onclick="copyText()">Copy notes</button>
+			
+			<div class="btn-group">
+				<!--dropdown one -->
+				<button class="btn btn-default dropdown-toggle" type="button" id="drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select a video
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="drop1">
+					<li><a href="#" onclick="loadVid('videos/count_two.mp4')">Sample Two</a></li>
+					<li><a href="#" onclick="loadVid('videos/count_three.mp4')">Sample Three</a></li>				
+				</ul>
+			</div>
+			
+			<div class="btn-group">
+				<!--dropdown two -->
+				<button class="btn btn-default dropdown-toggle" type="button" id="drop2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select a script
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="drop2">
+					<li><a href="#" onclick="loadScript(one)">Sample One</a></li>
+					<li><a href="#" onclick="loadScript(two)">Sample Two</a></li>
+				</ul>
+			</div>			
+		</div>
+	</div>
+
+	<div class="spacer col-md-12">
+	</div>
+	
+	<!-- Main video appears here -->
+	<div class="col-md-8">
+		<div id='main' class='text-center row'>
+			<video id="myVideo" width="640px" controls="true" src="videos/count.mp4">
+			</video>
+		</div>
+
+		<div id='text' class="row">
+			<form id="formContainer">
+				<p><em>Type a comment in the box (timecode is inserted automatically):</em></p>
+				<input id="formBox" onfocus="popcorn.pause()" type="text" onkeydown=" if (event.keyCode === 13) append() ">
+				</input>
+			</form>
+		</div>
+	
+		<div id="notes" class="row">
+			<h3>Notes</h3>
+			<!-- notes are added to empty UL below-->
+			<ul id="noteList">
+				<li id="example"><em>12.0 - Example note</em></li>
+			</ul>
+			<div class="spacer"></div>
+			<button id="clearList" class="btn btn-warning btn-xs" type="button" onclick="clearList()">Clear notes</button>
+		</div>
+		
+		<div class="spacer">
+		</div>
+		
+		<!--script defines popcorn element-->
+		<script type="text/javascript">
+			var popcorn = Popcorn('#myVideo');
+		</script>
+	</div>
+	
+	<!--sidebar section -->
+	<div id='sidebar' class='col-md-4'>
+		<h3 class="text-center">Script</h3>
+		<p class="text-center"><em>Paste a script in here for reference</em></p>
+		<p class="text-center"><textarea id="script" name="pasteScript" placeholder="I developed this tool for video professionals to review works in progress. Reviewers can make notes, and a time code reference is auto-generated. Ultimately, users can copy the notes with script and video file references. Further development could allow for storing notes on a database or other management."></textarea></p>
+	</div>
+	
+	<div id="clipboard" class="col-xs-8">
+		<h3 class="text-center">Ctrl-C or Cmd-C to copy your work</h3>
+		<textarea id="clipBd"></textarea>
+		<button id='clipBdButton' class="btn btn-danger btn-block" type="button" onclick="hideIt()">Done</button>
+	</div>
+	
+	<!--<div id="padded" class="row col-md-12">
+	</div>-->
+
+	<!--footer content -->
+	<footer class="navbar navbar-fixed-bottom">
+		<div id="footer" class="col-md-12">
+			<h4 class="text-center">&#169 2015 Brian Wagner</h4>
+		</div>
+	</footer>
+</div>
+
+</body>
+</html>
